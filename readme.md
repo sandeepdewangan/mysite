@@ -12,7 +12,10 @@
 > pip list || pip freeze
 > python -m pip install django
 > python -m django --version
+# Create Project
 > django-admin startproject project_name
+# Create App
+python manage.py startapp blog
 
 # Run the project
 > python manage.py runserver
