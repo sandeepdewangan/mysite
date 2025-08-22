@@ -25,6 +25,7 @@ python manage.py startapp blog
 # Admin Panel Setup
 python manage.py migrate
 python manage.py createsuperuser
+python manage.py makemigrations blog
 ```
 
 Collect Static files before production

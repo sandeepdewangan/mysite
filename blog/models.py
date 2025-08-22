@@ -1,10 +1,25 @@
 from django.db import models
 from django.utils import timezone
 from django.db.models.functions import Now
+from django.conf import settings
 
 class Post(models.Model):
+    class Status(models.TextChoices):
+        # > Post.Status.choices
+        #     [('DF', 'Draft'), ('PB', 'Published')]
+        # > Post.Status.labels
+        #     ['Draft', 'Published']
+        # > Post.Status.values
+        #     ['DF', 'PB']
+        # > Post.Status.names
+        #     ['DRAFT', 'PUBLISHED']
+        DRAFT = 'DF', 'Draft'
+        PUBLISHED = 'PB', 'Published'
+
     title = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250)
+    # related_name establishes reverse realtionship from User to Post.
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='blog_posts')
     body = models.TextField()
 
     # As timezone aware format, python generated default time.
@@ -15,6 +30,7 @@ class Post(models.Model):
 
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    status = models.CharField(max_length=2, choices=Status, default=Status.DRAFT)
 
     # While return data, sort the data
     class Meta:
