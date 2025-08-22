@@ -48,3 +48,58 @@ Template: Defines the presentation layer.
 View: Communicates with the database.
 
 > Django 5 comes with Asynchronous Server Gatewat Interface (ASGI) support.
+
+### Basic CRUD Commands
+
+```python
+>>> python manage.py shell
+>>> from django.contrib.auth.models import User
+>>> from blog.models import Post
+>>> user = User.objects.get(username='sandeep')
+>>> post = Post(title='Post from shell', slug='post-from-shell', body='Post body', author=user)
+>>> post.save()
+
+# Creates the post and commit to db.
+>>> Post.object.create()
+
+# Get or create
+user, created = User.objects.get_or_create(username='cherry')
+
+# updating
+post.title = 'New title'
+post.save()
+
+# Retrive
+all_posts = Post.objects.all()
+
+# Retrive with filters
+Post.objects.filter(title='Who are you?')
+
+# Lookup fields
+# __ defines the lookup type
+# Other eg. id__exact=1, title__contains='Django', id__in=[1,3]
+# author__username__startswith='sa'
+Post.objects.filter(id__exact=1)
+Post.objects.filter(id=1)
+
+# exclude
+Post.objects.filter(publish__year=2024).exclude(title__startswith='why')
+
+# Order by
+Post.objects.order_by('title')
+
+# Limiting querysets
+Post.objects.all()[:5]
+Post.objects.all()[3:6]
+
+# Delete
+post = Post.objects.get(id=1)
+post.delete()
+
+# Lookups with Q objects.
+>>> from django.db.models import Q
+>>> starts_why = Q(title__istartswith='why')
+>>> starts_who = Q(title__istartswith='who')
+>>> Post.objects.filter(starts_who | starts_why)
+
+```
