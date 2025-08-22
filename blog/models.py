@@ -3,6 +3,13 @@ from django.utils import timezone
 from django.db.models.functions import Now
 from django.conf import settings
 
+# Default manager is the object manager
+# Earlier -> Post.objects.all();
+# Access -> Post.published.all()
+class PublishedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(status=Post.Status.PUBLISHED)
+
 class Post(models.Model):
     class Status(models.TextChoices):
         # > Post.Status.choices
@@ -31,6 +38,10 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     status = models.CharField(max_length=2, choices=Status, default=Status.DRAFT)
+
+    # Managers
+    objects = models.Manager() # default
+    published = PublishedManager() # custom manager
 
     # While return data, sort the data
     class Meta:
