@@ -17,6 +17,11 @@ urlpatterns = [
         views.post_share,
         name="post_share",
     ),
+    path(
+        "<int:post_id>/comment/",
+        views.post_comment,
+        name="post_comment",
+    ),
     # if path converters like <int:id>/ is not sufficient,
     # we can use re_path() for complex URL patterns with Regex.
 ]
