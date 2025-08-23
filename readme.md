@@ -131,3 +131,15 @@ Filters: `{{ variable|filter }}`
 ### Canonical URL
 
 A canonical URL refers to the preferred, absolute URL for a specific resource or object within your application. This is particularly important for Search Engine Optimization (SEO) to prevent duplicate content issues when the same content might be accessible via multiple URLs.
+
+### Sending Email
+
+Sending email is straightforward in Django. We need to have SMTP server or access to an external SMTP server.
+
+**Python Decouple:** Library simplifies the use of envirnment variables in the project. Also facilitates the separation of configuration from code.
+
+Install
+
+`python -m pip install python-decouple`
+
+Create a file inside root dir, named it `.env`

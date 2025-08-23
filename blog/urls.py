@@ -12,6 +12,11 @@ urlpatterns = [
         views.post_detail,
         name="post_detail",
     ),
+    path(
+        "<int:post_id>/share/",
+        views.post_share,
+        name="post_share",
+    ),
     # if path converters like <int:id>/ is not sufficient,
     # we can use re_path() for complex URL patterns with Regex.
 ]
