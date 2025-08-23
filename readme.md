@@ -127,3 +127,7 @@ post.delete()
 Tags: `{% tag %}`
 Variables: `{{ var }}`
 Filters: `{{ variable|filter }}`
+
+### Canonical URL
+
+A canonical URL refers to the preferred, absolute URL for a specific resource or object within your application. This is particularly important for Search Engine Optimization (SEO) to prevent duplicate content issues when the same content might be accessible via multiple URLs.
