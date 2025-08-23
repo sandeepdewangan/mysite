@@ -143,3 +143,7 @@ Install
 `python -m pip install python-decouple`
 
 Create a file inside root dir, named it `.env`
+
+### Tagging
+
+python -m pip install django-taggit

@@ -4,6 +4,8 @@ from django.db.models.functions import Now
 from django.conf import settings
 from django.urls import reverse
 
+from taggit.managers import TaggableManager
+
 
 # Default manager is the object manager
 # Earlier -> Post.objects.all();
@@ -33,6 +35,7 @@ class Post(models.Model):
         settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="blog_posts"
     )
     body = models.TextField()
+    tags = TaggableManager()
 
     # As timezone aware format, python generated default time.
     publish = models.DateTimeField(default=timezone.now)
