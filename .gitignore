@@ -1,0 +1,27 @@
+# Django-specific files
+*.log
+*.pot
+*.pyc
+__pycache__/
+local_settings.py
+db.sqlite3
+media/ # Or specific subdirectories within media/ if you want to track some
+static_collected/ # If you're collecting static files to a separate directory
+
+# Virtual Environment
+.env
+venv/
+env/
+
+# IDE-specific files (examples for common IDEs)
+.idea/ # PyCharm
+.vscode/ # VS Code
+*.sublime-project
+*.sublime-workspace
+
+# Other common files/directories to ignore
+.DS_Store
+Thumbs.db
+.coverage
+.tox/
+.eggs/
