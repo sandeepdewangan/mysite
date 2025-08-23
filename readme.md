@@ -147,3 +147,10 @@ Create a file inside root dir, named it `.env`
 ### Tagging
 
 python -m pip install django-taggit
+
+### Retrieving posts by similarity (pg. 116) ❌
+
+### Custom Templates
+
+simple_tag: Processes the given data and returns a string
+inclusion_tag: Processes the given data and returns a rendered template
