@@ -32,8 +32,26 @@ Collect Static files before production
 
 ### Problem
 
+### Port Problem
+
 **Error**: That port is already in use.
 **Solution**: `sudo lsof -t -i tcp:8000 | xargs kill -9`
+
+### Vs Code HTML Extension
+
+Install djlint using pip and vscode extension then Configure vscode setting file:
+
+```json
+"files.associations": {
+    "*.tsx": "typescriptreact",
+    "**/templates/*/*.html": "django-html",
+    "**/templates/*": "django-txt",
+    "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+  },
+  "[html][django-html][handlebars][hbs][mustache][jinja][jinja-html][nj][njk][nunjucks][twig]": {
+    "editor.defaultFormatter": "monosans.djlint"
+  },
+```
 
 ## Basics
 
@@ -103,3 +121,9 @@ post.delete()
 >>> Post.objects.filter(starts_who | starts_why)
 
 ```
+
+### Templates
+
+Tags: `{% tag %}`
+Variables: `{{ var }}`
+Filters: `{{ variable|filter }}`
