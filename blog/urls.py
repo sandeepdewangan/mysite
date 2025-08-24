@@ -23,6 +23,7 @@ urlpatterns = [
         views.post_comment,
         name="post_comment",
     ),
+    path("search/", views.post_search, name="post_search"),
     # if path converters like <int:id>/ is not sufficient,
     # we can use re_path() for complex URL patterns with Regex.
 ]

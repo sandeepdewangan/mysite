@@ -219,3 +219,17 @@ DATABASES = {
 
 **Load previous data**
 `python manage.py loaddata mysite_data.json`
+
+### Simple Search Lookup
+
+We will begin with basic search lookups and progressively incorporate more sophisticated features.
+
+```shell
+# Simple Search
+>>> from blog.models import Post
+>>> Post.objects.filter(title__search='django')
+
+# Multiple field search
+from django.contrib.postgres.search import SearchVector
+Post.objects.annotate(search=SearchVector('title', 'body')).filter(search='django')
+```
