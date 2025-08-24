@@ -163,3 +163,59 @@ Writing post with Markdown editor
 ### Adding a sitemap to the site (pg. 134) ❌
 
 ### Creating feeds for blog posts (pg. 139) ❌
+
+### Setting up PostgreSQL
+
+**Install docker**
+
+**Install postgres**
+
+`docker pull postgres:16.2`
+
+**Start docker container**
+
+```
+docker run --name=blog_db -e POSRGRES_DB=blog -e POSTGRES_USER=blog -e POSTGRES_PASSWORD=Sandeep123@ -p 5432:5432 -d postgres:16.2
+```
+
+name: name of the container.
+
+e: environment variable.
+
+d: detach mode, docker runs in a background.
+
+POSTGRES_DB: Name of the PostgreSQL database. If not defined, the value of POSTGRES_USER is used for the database name.
+
+POSTGRES_USER: Used in conjunction with POSTGRES_PASSWORD to define a username and password. The user is created with superuser power.
+
+POSTGRES_PASSWORD: Sets the superuser password for PostgreSQL.
+
+**Install PostgreSQL adapter**
+
+`python -m pip install psycopg==3.1.18` OR `psycopg2-binary`
+
+**Dump exiting data**
+
+We need to download data from SQLite DB.
+
+`python manage.py dumpdata --indent=2 --output=mysite_data.json`
+
+**Switch DB**
+
+```json
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": config("DB_NAME"),
+        "USER": config("DB_USER"),
+        "PASSWORD": config("DB_PASSWORD"),
+        "HOST": config("DB_HOST"),
+    }
+}
+```
+
+**Migrate to new DB**
+`python manage.py migrate`
+
+**Load previous data**
+`python manage.py loaddata mysite_data.json`
