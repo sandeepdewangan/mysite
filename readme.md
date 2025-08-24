@@ -233,3 +233,16 @@ We will begin with basic search lookups and progressively incorporate more sophi
 from django.contrib.postgres.search import SearchVector
 Post.objects.annotate(search=SearchVector('title', 'body')).filter(search='django')
 ```
+
+### Full Text Search
+
+The Django ORM allows you to perform simple matching operations using `contains` filter.
+However, if we want to perform complex search lookups, retrieving results by similarity, or by weighting terms based on how frequently they appear in the text or how important different fields are we will need to use a full-text search engine.
+
+SQLite support for full-text search is limited and Django doesn’t support it out of the box. However, PostgreSQL is much better suited for full-text search and we can use the `django.contrib.postgres` module to use PostgreSQL’s full-text search capabilities.
+
+### Stemming and Ranking Results
+
+**Stemming** is the process of reducing words to their word stem, base, or root form. Stemming is used by search engines to reduce indexed words to their stem, and to be able to match inflected or derived words. For example, the words “music,” “musical,” and “musicality” can be considered similar words by a search engine. The stemming process normalizes each search token into a lexeme, a unit of lexical meaning that underlies a set of words that are related through inflection. The words “music,” “musical,” and “musicality” would convert to “music” when creating a search query.
+
+### Searching with trigram similarity (pg. 160) ❌

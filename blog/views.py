@@ -3,7 +3,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic import ListView
 from django.core.mail import send_mail
 from django.views.decorators.http import require_POST
-from django.contrib.postgres.search import SearchVector
+from django.contrib.postgres.search import SearchVector, SearchQuery, SearchRank
 
 from taggit.models import Tag
 
@@ -119,9 +119,24 @@ def post_search(request):
         form = SearchForm(request.GET)
         if form.is_valid():
             query = form.cleaned_data["query"]
-            results = Post.published.annotate(
-                search=SearchVector("title", "body")
-            ).filter(search=query)
+            # stemming and removing stop words in spanish
+            # search_vector = SearchVector("title", "body", config='spanish')
+            # search_vector = SearchVector("title", "body")
+            # Giving weights
+            # The default weights are D, C, B, and A, and they refer to the numbers 0.1, 0.2, 0.4, and 1.0, respectively.
+            search_vector = SearchVector("title", weight="A") + SearchVector(
+                "body", weight="B"
+            )
+            # search_query = SearchQuery(query, config='spanish')
+            search_query = SearchQuery(query)
+            results = (
+                Post.published.annotate(
+                    search=search_vector, rank=SearchRank(search_vector, search_query)
+                )
+                # .filter(search=search_query)
+                .filter(rank__gte=0.3)
+                .order_by("-rank")
+            )
 
     return render(
         request,
