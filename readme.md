@@ -154,3 +154,8 @@ python -m pip install django-taggit
 
 simple_tag: Processes the given data and returns a string
 inclusion_tag: Processes the given data and returns a rendered template
+
+### Markdown Templates Filter
+
+Writing post with Markdown editor
+`python -m pip install markdown`
