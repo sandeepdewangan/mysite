@@ -159,3 +159,7 @@ inclusion_tag: Processes the given data and returns a rendered template
 
 Writing post with Markdown editor
 `python -m pip install markdown`
+
+### Adding a sitemap to the site (pg. 134) ❌
+
+### Creating feeds for blog posts (pg. 139) ❌
